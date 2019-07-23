@@ -109,6 +109,10 @@ void exec_server( const struct server *serp )
 
 
 #ifdef RLIMIT_NOFILE
+   if ( SC_RLIM_FILES( scp ))
+   {
+      ps.ros.max_descriptors = SC_RLIM_FILES( scp );
+   }
    rl.rlim_max = ps.ros.orig_max_descriptors ;
    rl.rlim_cur = ps.ros.max_descriptors ;
    (void) setrlimit( RLIMIT_NOFILE, &rl ) ;
